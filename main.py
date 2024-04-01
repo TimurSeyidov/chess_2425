@@ -43,14 +43,18 @@ def main():
             print('Ход белых')
         else:
             print('Ход черных')
-        command =input('Введите команду: ')
+        command = input('Введите команду: ')
         if command == 'exit':
             break
         command = command.split()
         if len(command) == 3 and command[0] == 'move':
             try:
-                start = convert_step(command[1])
-                end = convert_step(command[2])
+                row, col = convert_step(command[1])
+                row_1, col_1 = convert_step(command[2])
+                if board.move_piece(row, col, row_1, col_1):
+                    print('Ход успешен')
+                else:
+                    print('Неверные координаты. Попробуйте другой ход')
             except Exception as err:
                 print('Ошибка:', err)
             finally:
